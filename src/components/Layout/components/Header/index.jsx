@@ -7,7 +7,6 @@ import "tippy.js/dist/tippy.css";
 import {
   faArrowRightFromBracket,
   faCircleXmark,
-  faCloudArrowUp,
   faCoins,
   faEarthAsia,
   faEllipsisVertical,
@@ -16,7 +15,6 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import {
-  faBell,
   faCircleQuestion,
   faKeyboard,
   faMessage,
@@ -26,9 +24,11 @@ import {
 import Button from "~/components/Button";
 import styles from "./Header.module.scss";
 import images from "~/assets/images";
+import Image from "~/components/Image";
 import { Wrapper as PopperWrapper } from "~/components/Popper";
 import AccountItem from "~/components/AccountItem";
 import Menu from "~/components/Popper/Menu";
+import { MessageIcon, UploadIcon } from "~/components/Icons";
 
 const cx = classNames.bind(styles);
 
@@ -149,17 +149,21 @@ function Header() {
         <div className={cx("actions")}>
           {currentUser ? (
             <>
-              <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+              <Tippy delay={[0, 100]} content="Upload video" placement="bottom">
                 <button className={cx("action-btn")}>
-                  <FontAwesomeIcon icon={faCloudArrowUp} />
+                  <UploadIcon />
                 </button>
               </Tippy>
-              <button className={cx("action-btn")}>
-                <FontAwesomeIcon icon={faBell} />
-              </button>
-              <button className={cx("action-btn")}>
-                <FontAwesomeIcon icon={faMessage} />
-              </button>
+              <Tippy delay={[0, 100]} content="Message" placement="bottom">
+                <button className={cx("action-btn")}>
+                  <MessageIcon />
+                </button>
+              </Tippy>
+              <Tippy delay={[0, 100]} content="Notify" placement="bottom">
+                <button className={cx("action-btn")}>
+                  <FontAwesomeIcon icon={faMessage} />
+                </button>
+              </Tippy>
             </>
           ) : (
             <>
@@ -172,10 +176,11 @@ function Header() {
             onChange={handleMenuChange}
           >
             {currentUser ? (
-              <img
+              <Image
                 className={cx("user-avatar")}
                 alt="Dinh Quan ELV"
-                src="https://lh3.googleusercontent.com/a/ACg8ocLr-WaQOOYYgxufAz56i6lS4c5fEgjmV_zPsfmVuha2wuYxZu3H=s360-c-no"
+                src="ttps://lh3.googleusercontent.com/a/ACg8ocLr-WaQOOYYgxufAz56i6lS4c5fEgjmV_zPsfmVuha2wuYxZu3H=s360-c-no"
+                fallback="https://lh3.googleusercontent.com/a/ACg8ocLr-WaQOOYYgxufAz56i6lS4c5fEgjmV_zPsfmVuha2wuYxZu3H=s360-c-no"
               />
             ) : (
               <button className={cx("more-btn")}>
