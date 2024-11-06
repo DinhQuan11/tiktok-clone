@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Search.module.scss";
+import * as searchServices from "~/apiServices/searchService";
 import { Wrapper as PopperWrapper } from "~/components/Popper";
 import AccountItem from "~/components/AccountItem";
 import { useDebounce } from "~/hooks";
@@ -31,21 +32,16 @@ function Search({ data }) {
       return;
     }
 
-    setLoading(true);
+    const fetchApi = async () => {
+      setLoading(true);
 
-    fetch(
-      `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-        debounced,
-      )}&type=less`,
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res.data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+      const result = await searchServices.search(debounced);
+
+      setSearchResult(result);
+      setLoading(false);
+    };
+
+    fetchApi();
   }, [debounced]);
 
   const handleClear = () => {
