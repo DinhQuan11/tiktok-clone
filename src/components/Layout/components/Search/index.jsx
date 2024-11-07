@@ -95,7 +95,12 @@ function Search({ data }) {
           <FontAwesomeIcon className={cx("loading")} icon={faSpinner} />
         )}
 
-        <button className={cx("search-btn")}>
+        <button
+          className={cx("search-btn")}
+          onMouseDown={(e) => {
+            e.preventDefault();
+          }}
+        >
           {<FontAwesomeIcon icon={faMagnifyingGlass} />}
         </button>
       </div>
